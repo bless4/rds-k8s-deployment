@@ -10,12 +10,12 @@ echo -n 'your-password' | base64   <br>
 Make sure your Kubernetes cluster can reach the RDS instance. This might involve:  <br>
 Ensuring the RDS instance is in a publicly accessible subnet or within the same VPC as your Kubernetes cluster.  <br>
 Configuring security groups to allow traffic from your Kubernetes nodes to the RDS instance on the PostgreSQL port (default is 5432).  <br>
-# 7 How to Deploy your application in this order
+# 7 Deploy your application in this order
 kubectl apply -f rds-postgres-secret.yaml  <br>
 kubectl apply -f rds-postgres-config.yaml   <br>
 kubectl apply -f my-app-deployment.yaml     <br>
 
-# Here's a recap of the setup without
+# Here's a recap of the setup.
 
 RDS PostgreSQL Instance: Hosted on Amazon RDS, managing its own persistence.
 Kubernetes Secrets: Used to store sensitive information like database credentials.
