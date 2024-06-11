@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-app-container
+        image: my-app-image
+        env:
+        - name: POSTGRES_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: rds-postgres-secret
+              key: postgres-username
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: rds-postgres-secret
+              key: postgres-password
+        - name: POSTGRES_ENDPOINT
+          valueFrom:
+            configMapKeyRef:
+              name: rds-postgres-config
+              key: postgres-endpoint
+        - name: POSTGRES_DB
+          valueFrom:
+            configMapKeyRef:
+              name: rds-postgres-config
+              key: postgres-db
+        - name: POSTGRES_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: rds-postgres-config
+              key: postgres-port
